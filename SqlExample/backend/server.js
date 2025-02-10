@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Yhdistä SQLite-tietokantaan
-const db = new sqlite3.Database('./database.db', (err) => {
+const db = new sqlite3.Database('./backend/database.db', (err) => {
   if (err) {
     console.error('Tietokantavirhe:', err.message);
   } else {
