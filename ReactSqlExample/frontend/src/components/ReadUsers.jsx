@@ -24,7 +24,7 @@ export default function ReadUsers() {
             {error && <p>{error}</p>}
             <ul>
                 {users.map((user) => (
-                    <li key={user.id}>{user.name} ({user.email})</li>
+                    <li key={user.id}>User ID: {user.id}, Name: {user.name}, Email: {user.email}</li>
                 ))}
             </ul>
         </div>
