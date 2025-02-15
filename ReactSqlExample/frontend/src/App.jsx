@@ -1,9 +1,11 @@
-const App = () => {
+import CreateUser from "./components/CreateUser.jsx";
+
+function App() {
   return (
     <div>
-      <p>Hello world</p>
+      <CreateUser />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
