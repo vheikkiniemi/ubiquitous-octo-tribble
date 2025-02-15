@@ -1,36 +1,26 @@
 const express = require('express');
-const sqlite3 = require('sqlite3').verbose();
+const Database = require('better-sqlite3');
 const path = require('path');
+const cors = require('cors');
 
 const app = express();
 const port = 3000;
 
-// Middleware JSON-pyyntöjen käsittelyyn
+app.use(cors());
 app.use(express.json());
-
-// Palvellaan staattiset tiedostot "public" -kansiosta
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Yhdistä SQLite-tietokantaan
-const db = new sqlite3.Database('./backend/database.db', (err) => {
-  if (err) {
-    console.error('Tietokantavirhe:', err.message);
-  } else {
-    console.log('Yhteys SQLite-tietokantaan onnistui.');
-  }
-});
+const db = new Database('./database.db');
 
 // Luo taulu, jos sitä ei ole olemassa
-db.run(`CREATE TABLE IF NOT EXISTS users (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT,
-  email TEXT UNIQUE
-)`);
-
-// Hae HTML-sivu pääreitillä
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+db.prepare(`
+  CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    email TEXT UNIQUE
+  )
+`).run();
 
 // Luo uusi käyttäjä (Create)
 app.post('/users', (req, res) => {
@@ -39,23 +29,24 @@ app.post('/users', (req, res) => {
     return res.status(400).json({ error: 'Nimi ja sähköposti vaaditaan' });
   }
 
-  const query = `INSERT INTO users (name, email) VALUES (?, ?)`;
-  db.run(query, [name, email], function (err) {
-    if (err) {
-      return res.status(500).json({ error: err.message });
-    }
-    res.status(201).json({ id: this.lastID, name, email });
-  });
+  try {
+    const stmt = db.prepare(`INSERT INTO users (name, email) VALUES (?, ?)`);
+    const result = stmt.run(name, email);
+    res.status(201).json({ id: result.lastInsertRowid, name, email });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // Hae kaikki käyttäjät (Read)
 app.get('/users', (req, res) => {
-  db.all('SELECT * FROM users', [], (err, rows) => {
-    if (err) {
-      return res.status(500).json({ error: err.message });
-    }
-    res.json(rows);
-  });
+  try {
+    const stmt = db.prepare('SELECT * FROM users');
+    const users = stmt.all();
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // Päivitä käyttäjän tiedot (Update)
@@ -67,31 +58,34 @@ app.put('/users/:id', (req, res) => {
     return res.status(400).json({ error: 'Nimi ja sähköposti vaaditaan' });
   }
 
-  const query = `UPDATE users SET name = ?, email = ? WHERE id = ?`;
-  db.run(query, [name, email, id], function (err) {
-    if (err) {
-      return res.status(500).json({ error: err.message });
-    }
-    if (this.changes === 0) {
+  try {
+    const stmt = db.prepare(`UPDATE users SET name = ?, email = ? WHERE id = ?`);
+    const result = stmt.run(name, email, id);
+
+    if (result.changes === 0) {
       return res.status(404).json({ error: 'Käyttäjää ei löytynyt' });
     }
     res.json({ message: 'Käyttäjän tiedot päivitetty', id });
-  });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // Poista käyttäjä (Delete)
 app.delete('/users/:id', (req, res) => {
   const { id } = req.params;
 
-  db.run(`DELETE FROM users WHERE id = ?`, id, function (err) {
-    if (err) {
-      return res.status(500).json({ error: err.message });
-    }
-    if (this.changes === 0) {
+  try {
+    const stmt = db.prepare(`DELETE FROM users WHERE id = ?`);
+    const result = stmt.run(id);
+
+    if (result.changes === 0) {
       return res.status(404).json({ error: 'Käyttäjää ei löytynyt' });
     }
     res.json({ message: 'Käyttäjä poistettu', id });
-  });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // Käynnistä palvelin
