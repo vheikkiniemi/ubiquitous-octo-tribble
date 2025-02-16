@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-export default function CreateUser({ onUserAdded }) {
+export default function CreateUser({ onUserAdded, buttonClass = "btn btn-primary" }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -42,7 +42,7 @@ export default function CreateUser({ onUserAdded }) {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        <button type="submit">Create</button>
+        <button type="submit" className={buttonClass}>Create</button>
       </form>
       {message && <p>{message}</p>}
     </div>

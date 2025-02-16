@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-export default function UpdateUser() {
+export default function UpdateUser({ onUserUpdated, buttonClass = "btn btn-warning" }) {
     const [id, setId] = useState("");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -20,6 +20,7 @@ export default function UpdateUser() {
             setId("");
             setName("");
             setEmail("");
+            if (onUserUpdated) onUserUpdated(); // Kutsutaan päivitysfunktiota
         } catch (error) {
             setMessage("Error: " + (error.response?.data?.error || error.message));
         }
@@ -50,7 +51,7 @@ export default function UpdateUser() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
-                <button type="submit">Update</button>
+                <button type="submit" className={buttonClass}>Update</button>
             </form>
             {message && <p>{message}</p>}
         </div>
