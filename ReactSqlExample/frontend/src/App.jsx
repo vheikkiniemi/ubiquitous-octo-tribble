@@ -1,15 +1,13 @@
 import CreateUser from "./components/CreateUser.jsx";
-import ReadUsers from "./components/ReadUsers.jsx";
 import UpdateUser from "./components/UpdateUser.jsx";
-import DeleteUser from "./components/DeleteUser.jsx";
+import ReadDeleteUsers from "./components/ReadDeleteUsers.jsx";
 
 function App() {
   return (
     <div>
       <CreateUser />
-      <ReadUsers />
+      <ReadDeleteUsers />
       <UpdateUser />
-      <DeleteUser />
     </div>
   );
 }
