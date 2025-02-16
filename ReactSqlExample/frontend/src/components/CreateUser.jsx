@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-export default function CreateUser() {
+export default function CreateUser({ onUserAdded }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -18,6 +18,7 @@ export default function CreateUser() {
       setMessage("User created successfully: " + response.data.name);
       setName("");
       setEmail("");
+      if (onUserAdded) onUserAdded(); // Kutsutaan päivitysfunktiota
     } catch (error) {
       setMessage("Error: " + (error.response?.data?.error || error.message));
     }
