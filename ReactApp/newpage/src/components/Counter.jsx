@@ -1,3 +1,4 @@
+import React from "react"; // 🟢 Lisää tämä!
 import { useState } from "react";
 
 const Counter = () => {

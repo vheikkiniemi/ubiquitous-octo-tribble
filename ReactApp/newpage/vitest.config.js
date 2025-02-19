@@ -1,8 +1,9 @@
-import { defineConfig } from "vitest/config";
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   test: {
-    environment: "jsdom", // Käytetään JSDOM:ia Reactin testaamiseen
-    setupFiles: "./setupTests.js", // Ladataan jest-dom-lisäosat automaattisesti
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: './vitest.setup.js',
   },
 });
