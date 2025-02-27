@@ -1,1 +1,0 @@
-console.log("Tervetuloa Node.js-maailmaan!");
