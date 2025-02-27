@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import React from "react";
 
 export default function CreateUser({ onUserAdded, buttonClass = "btn btn-primary" }) {
   const [name, setName] = useState("");
@@ -18,7 +19,7 @@ export default function CreateUser({ onUserAdded, buttonClass = "btn btn-primary
       setMessage("User created successfully: " + response.data.name);
       setName("");
       setEmail("");
-      if (onUserAdded) onUserAdded(); // Kutsutaan päivitysfunktiota
+      if (onUserAdded) onUserAdded(); // Calling the update function
     } catch (error) {
       setMessage("Error: " + (error.response?.data?.error || error.message));
     }
