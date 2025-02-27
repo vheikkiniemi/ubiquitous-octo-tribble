@@ -26,3 +26,4 @@ dist-ssr
 # Added project-specific
 package*
 eslint*
+.last*
