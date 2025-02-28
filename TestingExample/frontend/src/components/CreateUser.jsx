@@ -43,7 +43,7 @@ export default function CreateUser({ onUserAdded, buttonClass = "btn btn-primary
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        <button type="submit" className={buttonClass}>Create</button>
+        <button id="create-user" type="submit" className={buttonClass}>Create</button>
       </form>
       {message && <p>{message}</p>}
     </div>

@@ -39,14 +39,14 @@ export default function UpdateUser({ onUserUpdated, buttonClass = "btn btn-warni
                 />
                 <input
                     type="text"
-                    placeholder="Name"
+                    placeholder="New Name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
                 />
                 <input
                     type="email"
-                    placeholder="Email"
+                    placeholder="New Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
