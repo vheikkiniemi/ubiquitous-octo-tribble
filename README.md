@@ -1,4 +1,7 @@
-# ubiquitous-octo-tribble
-Testirepo - Web-kehittämisen jatkokurssi
+# Web-kehittämisen jatkokurssi / Advanced web development - Esimerkkitehtäviä / Sample assignments
 
-Lisätty selaimesta
+Permanent folders (will not be deleted):
+- ProjectExample
+- ReactSqlExample
+- SqlExample
+- TestingExample
