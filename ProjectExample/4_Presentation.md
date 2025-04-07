@@ -2,7 +2,8 @@
 
 > [!NOTE]  
 > Think of this as presenting your project, which you can include in your job application. The presentation should be clear and concise. Explain the entire project. Don't be afraid to highlight failures, as everyone has experienced them at some point. Consider that the viewer may not have a strong technical background.  
-> You can do this entire presentation in English or Finnish.
+>   
+> **You can do this entire presentation in English or Finnish.**
 
 ## 🎯 Project title
 
