@@ -48,6 +48,19 @@ _What worked well? What challenges did you face? What would you add or improve i
 
 ---
 
+## 📊 Work Hours Log
+
+_You can copy from the logbook here._
+
+| Date       | Time | Task                                |
+|------------|------|-------------------------------------|
+| 2025-02-12 | 3h   | Defined use cases                   |
+| 2025-02-14 | 2h   | Built login form                    |
+| ...        | ...  | ...                                 |
+| **Total**  | **63h** |                                 |
+
+---
+
 ## 🪢 Presentation link
 
 _Add a link to your video presentation or state that it was presented live._
