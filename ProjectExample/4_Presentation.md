@@ -54,8 +54,8 @@ _You can copy from the logbook here._
 
 | Date       | Time | Task                                |
 |------------|------|-------------------------------------|
-| 2025-02-12 | 3h   | Defined use cases                   |
-| 2025-02-14 | 2h   | Built login form                    |
+| 2.4.2025   | 3h   | Defined use cases                   |
+| 4.4.2025   | 2h   | Built login form                    |
 | ...        | ...  | ...                                 |
 | **Total**  | **63h** |                                 |
 
